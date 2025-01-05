@@ -1,6 +1,6 @@
 /* user and group to drop privileges to */
 static const char *user  = "nobody";
-static const char *group = "nogroup"; // use "nobody" for arch
+static const char *group = "nobody"; // use "nobody" for arch
 
 static const char *colorname[NUMCOLS] = {
 	#if DWM_LOGO_PATCH && !BLUR_PIXELATED_SCREEN_PATCH
@@ -38,7 +38,7 @@ static const char * background_image = "";
 
 #if DWM_LOGO_PATCH
 /* insert grid pattern with scale 1:1, the size can be changed with logosize */
-static const int logosize = 75;
+static const int logosize = 125;
 static const int logow = 12;   /* grid width and height for right center alignment*/
 static const int logoh = 6;
 
@@ -90,23 +90,25 @@ static const float alpha = 0.9;
 #endif // ALPHA_PATCH
 
 /* treat a cleared input like a wrong password (color) */
-static const int failonclear = 1;
+static const int failonclear = 0;
 
 #if AUTO_TIMEOUT_PATCH
 /* length of time (seconds) until */
-static const int timeoffset = 60;
+static const int timeoffset = 60 * 15;
 
 /* should [command] be run only once? */
-static const int runonce = 0;
+static const int runonce = 1;
 
 /* command to be run after [time] has passed */
+/* TODO: write a script that will check if the user wants to shutdown
+on inactivity or not, and act accordingly. */
 static const char *command = "doas poweroff";
 #endif // AUTO_TIMEOUT_PATCH
 
 #if FAILURE_COMMAND_PATCH
 /* number of failed password attempts until failcommand is executed.
    Set to 0 to disable */
-static const int failcount = 0;
+static const int failcount = 6;
 
 /* command to be executed after [failcount] failed password attempts */
 static const char *failcommand = "shutdown";
@@ -132,12 +134,12 @@ static const int pixelSize = 10;
 
 #if CONTROLCLEAR_PATCH
 /* allow control key to trigger fail on clear */
-static const int controlkeyclear = 0;
+static const int controlkeyclear = 1;
 #endif // CONTROLCLEAR_PATCH
 
 #if DPMS_PATCH
 /* time in seconds before the monitor shuts down */
-static const int monitortime = 5;
+static const int monitortime = 60;
 #endif // DPMS_PATCH
 
 #if KEYPRESS_FEEDBACK_PATCH

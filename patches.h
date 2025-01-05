@@ -19,6 +19,7 @@
 /* This patch allows for a command to be executed after a specified time of inactivity.
  * https://tools.suckless.org/slock/patches/auto-timeout/
  */
+/* TODO: see config.def.h comment for details */
 #define AUTO_TIMEOUT_PATCH 0
 
 /* This patch adds a background image for slock.
@@ -64,7 +65,7 @@
  * and don't want to spoil the detection of failed unlocking attempts.
  * https://tools.suckless.org/slock/patches/control-clear/
  */
-#define CONTROLCLEAR_PATCH 0
+#define CONTROLCLEAR_PATCH 1
 
 /* This patch interacts with the Display Power Signaling and automatically shuts down
  * the monitor after a configurable amount of seconds.
@@ -72,17 +73,17 @@
  * and the password can be entered then.
  * https://tools.suckless.org/slock/patches/dpms/
  */
-#define DPMS_PATCH 0
+#define DPMS_PATCH 1
 
 /* This patch draws the dwm logo which changes color based on the state.
  * https://tools.suckless.org/slock/patches/dwmlogo/
  */
-#define DWM_LOGO_PATCH 0
+#define DWM_LOGO_PATCH 1
 
 /* This patch allows for a command to be run after a specified number of incorrect attempts.
  * https://tools.suckless.org/slock/patches/failure-command/
  */
-#define FAILURE_COMMAND_PATCH 0
+#define FAILURE_COMMAND_PATCH 1
 
 /* Draws random blocks on the screen to display keypress feedback.
  * https://tools.suckless.org/slock/patches/keypress-feedback/
@@ -94,7 +95,7 @@
  * to be adjusted or to skip to the next song without having to unlock the screen first.
  * https://tools.suckless.org/slock/patches/mediakeys/
  */
-#define MEDIAKEYS_PATCH 0
+#define MEDIAKEYS_PATCH 1
 
 /* This patch lets you add a message to your lock screen. You can place a default message
  * in config.h and you can also pass a message with the -m command line option.
@@ -142,4 +143,4 @@
 /* This patch adds the ability to get colors via Xresources.
  * https://tools.suckless.org/slock/patches/xresources/
  */
-#define XRESOURCES_PATCH 0
+#define XRESOURCES_PATCH 1
