@@ -6,18 +6,15 @@ include config.mk
 SRC = slock.c ${COMPATSRC}
 OBJ = ${SRC:.c=.o}
 
+FLEX_SCRIPT = flexipatch-finalizer/flexipatch-finalizer.sh
+FLEX_TEMP_DIR = /tmp/slock-flex
+
 all: slock
 
 .c.o:
 	${CC} -c ${CFLAGS} $<
 
-${OBJ}: config.h config.mk arg.h util.h patches.h
-
-config.h:
-	cp config.def.h $@
-
-patches.h:
-	cp patches.def.h $@
+${OBJ}: config.mk arg.h util.h
 
 slock: ${OBJ}
 	${CC} -o $@ ${OBJ} ${LDFLAGS}
@@ -33,7 +30,7 @@ dist: clean
 	gzip slock-${VERSION}.tar
 	rm -rf slock-${VERSION}
 
-install: all
+install: flex all
 	mkdir -p ${DESTDIR}${PREFIX}/bin
 	cp -f slock ${DESTDIR}${PREFIX}/bin
 	chmod 755 ${DESTDIR}${PREFIX}/bin/slock
@@ -47,4 +44,16 @@ uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/slock
 	rm -f ${DESTDIR}${MANPREFIX}/man1/slock.1
 
-.PHONY: all clean dist install uninstall
+flex:
+	@rm -rf "$(FLEX_TEMP_DIR)"
+
+	@if [ -z "$(FLEX_SCRIPT)" ] || [ ! -f "$(FLEX_SCRIPT)" ]; then \
+		echo "warn: '$(FLEX_SCRIPT)' not found."; \
+		cp config.def.h config.h; \
+		exit 1; \
+	fi
+	bash $(FLEX_SCRIPT) --run --directory $(CURDIR) --output $(FLEX_TEMP_DIR)
+
+	cp "$(FLEX_TEMP_DIR)/config.def.h" config.h
+
+.PHONY: all clean dist install uninstall flex
