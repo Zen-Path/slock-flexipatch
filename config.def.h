@@ -10,7 +10,7 @@ static const char *colorname[NUMCOLS] = {
 	[INPUT]         = "#D79921",    /* dwm logo during input */
 	[FAILED]        = "#CC241D",    /* dwm logo wrong password */
 	#if CAPSCOLOR_PATCH
-	[CAPS] =   "red",       /* CapsLock on */
+	[CAPS]          = "#B16286",    /* CapsLock on */
 	#endif // CAPSCOLOR_PATCH
 	#if PAMAUTH_PATCH
 	[PAM]           = "#9400D3",    /* waiting for PAM */
