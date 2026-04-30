@@ -1,4 +1,4 @@
-Similar to [dwm-flexipatch](https://github.com/bakkeby/dwm-flexipatch) this slock 1.6 (3791a99,
+Similar to [dwm-flexipatch](https://github.com/Zen-Path/dwm-flexipatch) this slock 1.6 (3791a99,
 2025-08-16) project has a different take on patching. It uses preprocessor directives to decide
 whether or not to include a patch during build time. Essentially this means that this build, for
 better or worse, contains both the patched _and_ the original code. The aim being that you can
