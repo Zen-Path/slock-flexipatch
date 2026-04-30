@@ -1,30 +1,65 @@
-Similar to [dwm-flexipatch](https://github.com/Zen-Path/dwm-flexipatch) this slock 1.6 (3791a99,
-2025-08-16) project has a different take on patching. It uses preprocessor directives to decide
-whether or not to include a patch during build time. Essentially this means that this build, for
-better or worse, contains both the patched _and_ the original code. The aim being that you can
-select which patches to include and the build will contain that code and nothing more.
+<div align="center">
+    <img src="./docs/static/logo.svg"  height=80>
+    <h1>slock</h1>
+    <p>Simple screen locker utility for X.</p>
+</div>
 
-For example to include the `capscolor` patch then you would only need to flip this setting from 0
-to 1 in [patches.h](./patches.h):
+Similar to [dwm-flexipatch](https://github.com/Zen-Path/dwm-flexipatch) this slock 1.6
+(3791a99, 2025-08-16) fork uses preprocessor directives to decide whether or not to
+include a patch into the final binary.
+
+Both patched and unpatched code are included in the source. Patches are enabled or
+disabled at build time via flags defined in [patches.h](./patches.h).
+
+For example, to enable the `capscolor` patch, flip the setting from `0` to `1`:
+
 ```c
 #define CAPSCOLOR_PATCH 1
 ```
 
-Once you have found out what works for you and what doesn't then you should be in a better position
-to choose patches should you want to start patching from scratch.
+This fork automatically runs [flexipatch-finalizer](https://github.com/bakkeby/flexipatch-finalizer)
+during installation.
 
-Alternatively if you have found the patches you want, but don't want the rest of the flexipatch
-entanglement on your plate then you may want to have a look at
-[flexipatch-finalizer](https://github.com/bakkeby/flexipatch-finalizer); a custom pre-processor
-tool that removes all the unused flexipatch code leaving you with a build that contains the patches
-you selected.
+Unlike its typical use (removing unused code from the source), here it is only applied
+to the generated `config.h`. This produces a simplified version of the configuration
+file, making it easier to inspect the active build configuration.
 
-Refer to [https://tools.suckless.org/slock/](https://tools.suckless.org/slock/) for details on the
-slock tool, how to install it and how it works.
+This step does **not** modify the rest of the source code.
 
----
+- [Setup](#setup)
+  - [Requirements](#requirements)
+  - [Installation](#installation)
+  - [Usage](#usage)
+- [Preview](#preview)
+- [Changelog](#changelog)
+- [Patches included](#patches-included)
 
-### Preview
+## Setup
+
+### Requirements
+
+You need the Xlib header files installed (`libX11` on Arch).
+
+### Installation
+
+1. Edit [config.mk](./config.mk) to match your setup (default prefix is `/usr/local`).
+2. Build and install:
+
+```sh
+sudo make clean install
+```
+
+### Usage
+
+Run:
+
+```sh
+slock
+```
+
+To unlock the screen, enter your user password and press Enter.
+
+## Preview
 
 <p align="center">
   <img src="./docs/static/waiting-for-pw.png" width="30%" title="Waiting for password"/>
@@ -32,9 +67,7 @@ slock tool, how to install it and how it works.
   <img src="./docs/static/wrong-pw.png" width="30%" title="Wrong password"/>
 </p>
 
----
-
-### Changelog:
+## Changelog
 
 2025-11-15 - Added the visual unlock patch
 
@@ -54,7 +87,7 @@ slock tool, how to install it and how it works.
 
 2019-10-16 - Introduced [flexipatch-finalizer](https://github.com/bakkeby/flexipatch-finalizer)
 
-### Patches included:
+## Patches included
 
    - [alpha](https://github.com/khuedoan/slock)
       - enables transparency for slock
@@ -67,7 +100,7 @@ slock tool, how to install it and how it works.
       - sets the lockscreen picture to a background image
 
    - [blur_pixelated_screen](https://tools.suckless.org/slock/patches/blur-pixelated-screen/)
-      - sets the lockscreen picture to a blured or pixelated screenshot
+      - sets the lockscreen picture to a blurred or pixelated screenshot
 
    - [capscolor](https://tools.suckless.org/slock/patches/capscolor/)
       - adds an additional color to indicate the state of Caps Lock
