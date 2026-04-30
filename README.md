@@ -24,6 +24,16 @@ slock tool, how to install it and how it works.
 
 ---
 
+### Preview
+
+<p align="center">
+  <img src="./docs/static/waiting-for-pw.png" width="30%" title="Waiting for password"/>
+  <img src="./docs/static/typing-pw.png" width="30%" title="Typing password"/>
+  <img src="./docs/static/wrong-pw.png" width="30%" title="Wrong password"/>
+</p>
+
+---
+
 ### Changelog:
 
 2022-03-28 - Added the background image patch
