@@ -60,6 +60,10 @@ int runflag = 0;
 static time_t locktime;
 #endif // QUICKCANCEL_PATCH
 
+#if VISUAL_UNLOCK_PATCH
+int visual_unlock = 0;
+#endif // VISUAL_UNLOCK_PATCH
+
 enum {
 	#if DWM_LOGO_PATCH && !BLUR_PIXELATED_SCREEN_PATCH
 	BACKGROUND,
@@ -393,16 +397,17 @@ readpw(Display *dpy, struct xrandr *rr, struct lock **locks, int nscreens,
 			#endif // MEDIAKEYS_PATCH
 			default:
 				#if CONTROLCLEAR_PATCH
-				if (controlkeyclear && iscntrl((int)buf[0]))
+				if (controlkeyclear && iscntrl((int)buf[0]) && !num)
 					continue;
-				if (num && (len + num < sizeof(passwd)))
-				#else
+				#endif // CONTROLCLEAR_PATCH
 				if (num && !iscntrl((int)buf[0]) &&
 				    (len + num < sizeof(passwd)))
-				#endif // CONTROLCLEAR_PATCH
 				{
 					memcpy(passwd + len, buf, num);
 					len += num;
+				} else if (buf[0] == '\025') { /* ctrl-u clears input */
+					explicit_bzero(&passwd, sizeof(passwd));
+					len = 0;
 				}
 				#if KEYPRESS_FEEDBACK_PATCH
 				if (blocks_enabled)
@@ -586,7 +591,12 @@ lockscreen(Display *dpy, struct xrandr *rr, int screen)
 		/* input is grabbed: we can lock the screen */
 		if (ptgrab == GrabSuccess && kbgrab == GrabSuccess) {
 			#if !UNLOCKSCREEN_PATCH
+			#if VISUAL_UNLOCK_PATCH
+			if (!visual_unlock)
+				XMapRaised(dpy, lock->win);
+			#else
 			XMapRaised(dpy, lock->win);
+			#endif // VISUAL_UNLOCK_PATCH
 			#endif // UNLOCKSCREEN_PATCH
 			if (rr->active)
 				XRRSelectInput(dpy, lock->win, RRScreenChangeNotifyMask);
@@ -599,7 +609,7 @@ lockscreen(Display *dpy, struct xrandr *rr, int screen)
 			drawlogo(dpy, lock, INIT);
 			#endif // DWM_LOGO_PATCH
 			#if ALPHA_PATCH
-			unsigned int opacity = (unsigned int)(alpha * 0xffffffff);
+			unsigned int opacity = (unsigned int)((double)alpha * 0xffffffff);
 			XChangeProperty(dpy, lock->win, XInternAtom(dpy, "_NET_WM_WINDOW_OPACITY", False), XA_CARDINAL, 32, PropModeReplace, (unsigned char *)&opacity, 1L);
 			XSync(dpy, False);
 			#endif // ALPHA_PATCH
@@ -627,11 +637,15 @@ lockscreen(Display *dpy, struct xrandr *rr, int screen)
 static void
 usage(void)
 {
-	#if MESSAGE_PATCH || COLOR_MESSAGE_PATCH
-	die("usage: slock [-v] [-f] [-m message] [cmd [arg ...]]\n");
-	#else
-	die("usage: slock [-v] [cmd [arg ...]]\n");
-	#endif // MESSAGE_PATCH | COLOR_MESSAGE_PATCH
+	die("usage: slock [-v] "
+	    #if VISUAL_UNLOCK_PATCH
+	    "[-u] "
+	    #endif
+	    #if MESSAGE_PATCH || COLOR_MESSAGE_PATCH
+	    "[-f] [-m message] "
+	    #endif
+	    "[cmd [arg ...]]\n"
+	);
 }
 
 int
@@ -669,6 +683,11 @@ main(int argc, char **argv) {
 		}
 		return 0;
 	#endif // MESSAGE_PATCH | COLOR_MESSAGE_PATCH
+	#if VISUAL_UNLOCK_PATCH
+	case 'u':
+		visual_unlock = 1;
+		break;
+	#endif // VISUAL_UNLOCK_PATCH
 	default:
 		usage();
 	} ARGEND
@@ -748,6 +767,11 @@ main(int argc, char **argv) {
 
 	#if DPMS_PATCH
 	/* DPMS magic to disable the monitor */
+	#if VISUAL_UNLOCK_PATCH
+	if (visual_unlock)
+		monitortime = monitortime_vu;
+	#endif // VISUAL_UNLOCK_PATCH
+
 	if (!DPMSCapable(dpy))
 		die("slock: DPMSCapable failed\n");
 	if (!DPMSEnable(dpy))

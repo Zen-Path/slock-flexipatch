@@ -1,5 +1,5 @@
-Similar to [dwm-flexipatch](https://github.com/bakkeby/dwm-flexipatch) this slock 1.5 (a70d5d2,
-2025-03-09) project has a different take on patching. It uses preprocessor directives to decide
+Similar to [dwm-flexipatch](https://github.com/bakkeby/dwm-flexipatch) this slock 1.6 (3791a99,
+2025-08-16) project has a different take on patching. It uses preprocessor directives to decide
 whether or not to include a patch during build time. Essentially this means that this build, for
 better or worse, contains both the patched _and_ the original code. The aim being that you can
 select which patches to include and the build will contain that code and nothing more.
@@ -35,6 +35,8 @@ slock tool, how to install it and how it works.
 ---
 
 ### Changelog:
+
+2025-11-15 - Added the visual unlock patch
 
 2022-03-28 - Added the background image patch
 

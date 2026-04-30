@@ -140,6 +140,13 @@
  */
 #define UNLOCKSCREEN_PATCH 0
 
+/* This patch adds a -u command line argument that keeps input locked without showing the lock
+ * screen. The original patch simply combines the unlock screen patch and the DPMS patch.
+ * Enable DPMS_PATCH separately if you want DPMS.
+ * https://tools.suckless.org/slock/patches/visual-unlock-dpms/
+ */
+#define VISUAL_UNLOCK_PATCH 0
+
 /* This patch adds the ability to get colors via Xresources.
  * https://tools.suckless.org/slock/patches/xresources/
  */
