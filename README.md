@@ -5,7 +5,7 @@ better or worse, contains both the patched _and_ the original code. The aim bein
 select which patches to include and the build will contain that code and nothing more.
 
 For example to include the `capscolor` patch then you would only need to flip this setting from 0
-to 1 in [patches.h](https://github.com/bakkeby/slock-flexipatch/blob/master/patches.h):
+to 1 in [patches.h](./patches.h):
 ```c
 #define CAPSCOLOR_PATCH 1
 ```
