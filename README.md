@@ -4,9 +4,10 @@
     <p>Simple screen locker utility for X.</p>
 </div>
 
-Similar to [dwm-flexipatch](https://github.com/Zen-Path/dwm-flexipatch) this slock 1.6
-(3791a99, 2025-08-16) fork uses preprocessor directives to decide whether or not to
-include a patch into the final binary.
+Similar to [dwm-flexipatch](https://github.com/Zen-Path/dwm-flexipatch) this
+[slock](https://tools.suckless.org/slock/) 1.6 (3791a99, 2025-08-16) fork uses
+preprocessor directives to decide whether or not to include a patch into the final
+binary.
 
 Both patched and unpatched code are included in the source. Patches are enabled or
 disabled at build time via flags defined in [patches.h](./patches.h).
