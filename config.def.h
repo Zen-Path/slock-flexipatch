@@ -2,7 +2,7 @@
 static const char *user  = "nobody";
 static const char *group = "nobody"; // use "nobody" for arch
 
-// Choose a design for DWM_LOGO_PATCH
+// choose a design for DWM_LOGO_PATCH
 #define DESIGN_LOCK 0
 #define DESIGN_HEART 1
 #define DESIGN_LOGO_DWM 100
@@ -50,7 +50,7 @@ static const char * font_name = "6x10";
 #endif // MESSAGE_PATCH | COLOR_MESSAGE_PATCH
 
 #if BACKGROUND_IMAGE_PATCH
-/* Background image path, should be available to the user above */
+/* background image path, should be available to the user above */
 static const char * background_image = "";
 #endif // BACKGROUND_IMAGE_PATCH
 
@@ -153,26 +153,26 @@ static XRectangle rectangles[] = {
  * Xresources preferences to load at startup
  */
 ResourcePref resources[] = {
-		#if DWM_LOGO_PATCH && !BLUR_PIXELATED_SCREEN_PATCH
-		{ "background",   STRING,  &colorname[BACKGROUND] },
-		#endif //DWM_LOGO_PATCH
-		#if BACKGROUND_IMAGE_PATCH
-		{ "bg_image",     STRING,  &background_image },
-		#endif // BACKGROUND_IMAGE_PATCH
-		{ "locked",       STRING,  &colorname[INIT] },
-		{ "input",        STRING,  &colorname[INPUT] },
-		{ "failed",       STRING,  &colorname[FAILED] },
-		#if CAPSCOLOR_PATCH
-		{ "capslock",     STRING,  &colorname[CAPS] },
-		#endif // CAPSCOLOR_PATCH
-		#if PAMAUTH_PATCH
-		{ "pamauth",      STRING,  &colorname[PAM] },
-		#endif // PAMAUTH_PATCH
-		#if MESSAGE_PATCH || COLOR_MESSAGE_PATCH
-		{ "message",      STRING,  &message },
-		{ "text_color",   STRING,  &text_color },
-		{ "font_name",    STRING,  &font_name },
-		#endif // MESSAGE_PATCH | COLOR_MESSAGE_PATCH
+    #if DWM_LOGO_PATCH && !BLUR_PIXELATED_SCREEN_PATCH
+    { "background",   STRING,  &colorname[BACKGROUND] },
+    #endif //DWM_LOGO_PATCH
+    #if BACKGROUND_IMAGE_PATCH
+    { "bg_image",     STRING,  &background_image },
+    #endif // BACKGROUND_IMAGE_PATCH
+    { "locked",       STRING,  &colorname[INIT] },
+    { "input",        STRING,  &colorname[INPUT] },
+    { "failed",       STRING,  &colorname[FAILED] },
+    #if CAPSCOLOR_PATCH
+    { "capslock",     STRING,  &colorname[CAPS] },
+    #endif // CAPSCOLOR_PATCH
+    #if PAMAUTH_PATCH
+    { "pamauth",      STRING,  &colorname[PAM] },
+    #endif // PAMAUTH_PATCH
+    #if MESSAGE_PATCH || COLOR_MESSAGE_PATCH
+    { "message",      STRING,  &message },
+    { "text_color",   STRING,  &text_color },
+    { "font_name",    STRING,  &font_name },
+    #endif // MESSAGE_PATCH | COLOR_MESSAGE_PATCH
 };
 #endif // XRESOURCES_PATCH
 
@@ -214,13 +214,13 @@ static const secretpass scom[] = {
 #endif // SECRET_PASSWORD_PATCH
 
 #if BLUR_PIXELATED_SCREEN_PATCH
-/* Enable blur */
+/* enable blur */
 #define BLUR
-/* Set blur radius */
+/* set blur radius */
 static const int blurRadius = 5;
-/* Enable Pixelation */
+/* enable Pixelation */
 //#define PIXELATION
-/* Set pixelation radius */
+/* set pixelation radius */
 static const int pixelSize = 10;
 #endif // BLUR_PIXELATED_SCREEN_PATCH
 
@@ -248,7 +248,7 @@ static const int blocks_height = 16;
 static const int blocks_x = 0;
 static const int blocks_y = 0;
 
-// Number of blocks
+// number of blocks
 static const int blocks_count = 10;
 #endif // KEYPRESS_FEEDBACK_PATCH
 
