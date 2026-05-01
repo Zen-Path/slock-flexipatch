@@ -13,6 +13,7 @@ static const char *group = "nobody"; // use "nobody" for arch
 static const char *colorname[NUMCOLS] = {
 	#if DWM_LOGO_PATCH && !BLUR_PIXELATED_SCREEN_PATCH
 	[BACKGROUND]    = "#32302F",    /* after initialization */
+	#endif // DWM_LOGO_PATCH
     #if ACTIVE_DESIGN == DESIGN_HEART
 	[INIT]          = "#CC241D",    /* after initialization */
 	[INPUT]         = "#458588",    /* during input */
@@ -26,7 +27,6 @@ static const char *colorname[NUMCOLS] = {
 	[INPUT]         = "#D79921",
 	[FAILED]        = "#CC241D",
 	#endif // ACTIVE_DESIGN
-	#endif // DWM_LOGO_PATCH
 	#if CAPSCOLOR_PATCH
 	[CAPS]          = "#B16286",    /* CapsLock on */
 	#endif // CAPSCOLOR_PATCH
