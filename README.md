@@ -18,7 +18,7 @@ For example, to enable the `capscolor` patch, flip the setting from `0` to `1`:
 #define CAPSCOLOR_PATCH 1
 ```
 
-This fork automatically runs [flexipatch-finalizer](https://github.com/bakkeby/flexipatch-finalizer)
+This fork automatically runs [flexipatch-finalizer](https://github.com/Zen-Path/flexipatch-finalizer)
 during installation.
 
 Unlike its typical use (removing unused code from the source), here it is only applied
