@@ -61,10 +61,22 @@ To unlock the screen, enter your user password and press Enter.
 
 ## Preview
 
+Check out these lock screen designs:
+
 <p align="center">
-  <img src="./docs/static/waiting-for-pw.png" width="30%" title="Waiting for password"/>
-  <img src="./docs/static/typing-pw.png" width="30%" title="Typing password"/>
-  <img src="./docs/static/wrong-pw.png" width="30%" title="Wrong password"/>
+  <img src="./docs/static/lock_emoji_smile.png" width="45%" title="Smile emoji"/>
+  <img src="./docs/static/lock_heart.png" width="45%" title="Heart symbol"/>
+</p>
+
+<p align="center">
+  <img src="./docs/static/lock_typing-pw.png" width="30%" title="Typing password"/>
+  <img src="./docs/static/lock_waiting-for-pw.png" width="30%" title="Waiting for password"/>
+  <img src="./docs/static/lock_wrong-pw.png" width="30%" title="Wrong password"/>
+</p>
+
+<p align="center">
+  <img src="./docs/static/lock_logo_dwm.png" width="30%" title="dwm logo"/>
+  <img src="./docs/static/lock_logo_flexycon.png" width="30%" title="Flexycon logo"/>
 </p>
 
 ## Changelog

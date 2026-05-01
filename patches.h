@@ -76,6 +76,7 @@
 #define DPMS_PATCH 1
 
 /* This patch draws the dwm logo which changes color based on the state.
+ * To select another design, change the ACTIVE_DESIGN macro in the config file.
  * https://tools.suckless.org/slock/patches/dwmlogo/
  */
 #define DWM_LOGO_PATCH 1

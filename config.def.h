@@ -2,13 +2,31 @@
 static const char *user  = "nobody";
 static const char *group = "nobody"; // use "nobody" for arch
 
+// Choose a design for DWM_LOGO_PATCH
+#define DESIGN_LOCK 0
+#define DESIGN_HEART 1
+#define DESIGN_LOGO_DWM 100
+#define DESIGN_LOGO_FLEXYCON 101
+#define DESIGN_EMOJI_SMILE 200
+#define ACTIVE_DESIGN DESIGN_HEART
+
 static const char *colorname[NUMCOLS] = {
 	#if DWM_LOGO_PATCH && !BLUR_PIXELATED_SCREEN_PATCH
 	[BACKGROUND]    = "#32302F",    /* after initialization */
+    #if ACTIVE_DESIGN == DESIGN_HEART
+	[INIT]          = "#CC241D",    /* after initialization */
+	[INPUT]         = "#458588",    /* during input */
+	[FAILED]        = "#D79921",    /* wrong password */
+    #elif ACTIVE_DESIGN == DESIGN_EMOJI_SMILE
+	[INIT]          = "#D79921",
+	[INPUT]         = "#458588",
+	[FAILED]        = "#CC241D",
+    #else
+	[INIT]          = "#458588",
+	[INPUT]         = "#D79921",
+	[FAILED]        = "#CC241D",
+	#endif // ACTIVE_DESIGN
 	#endif // DWM_LOGO_PATCH
-	[INIT]          = "#458588",    /* dwm logo after initialization */
-	[INPUT]         = "#D79921",    /* dwm logo during input */
-	[FAILED]        = "#CC241D",    /* dwm logo wrong password */
 	#if CAPSCOLOR_PATCH
 	[CAPS]          = "#B16286",    /* CapsLock on */
 	#endif // CAPSCOLOR_PATCH
@@ -37,9 +55,48 @@ static const char * background_image = "";
 #endif // BACKGROUND_IMAGE_PATCH
 
 #if DWM_LOGO_PATCH
-/* insert grid pattern with scale 1:1, the size can be changed with logosize */
-static const int logosize   = 125;
-static const int logow      = 12;   /* grid width and height for right center alignment*/
+#if ACTIVE_DESIGN == DESIGN_LOCK
+/* insert grid pattern with scale 1:1 */
+static const int logosize   = 50;
+/* grid width and height for right center alignment */
+static const int logow      = 13;
+static const int logoh      = 15;
+
+static XRectangle rectangles[] = {
+   /* x   y   w   h */
+   {  4,  0,  5,  2 },
+   {  3,  1,  2,  2 },
+   {  8,  1,  2,  2 },
+   {  2,  2,  2,  4 },
+   {  9,  2,  2,  4 },
+   {  1,  6, 11,  3 },
+   {  0,  7,  6,  7 },
+   {  1, 12, 11,  3 },
+   {  7,  7,  6,  7 },
+};
+#elif ACTIVE_DESIGN == DESIGN_HEART
+static const int logosize   = 50;
+static const int logow      = 14;
+static const int logoh      = 13;
+
+static XRectangle rectangles[] = {
+    /* x   y   w   h */
+    {  0,  2, 15,  4 },
+    {  1,  1,  6,  1 },
+    {  2,  0,  4,  1 },
+    {  1,  6, 13,  1 },
+    {  2,  7, 11,  1 },
+    {  3,  8,  9,  1 },
+    {  4,  9,  7,  1 },
+    {  5, 10,  5,  1 },
+    {  6, 11,  3,  1 },
+    {  7, 12,  1,  1 },
+    {  8,  1,  6,  1 },
+    {  9,  0,  4,  1 },
+};
+#elif ACTIVE_DESIGN == DESIGN_LOGO_DWM
+static const int logosize   = 90;
+static const int logow      = 12;
 static const int logoh      = 6;
 
 static XRectangle rectangles[] = {
@@ -54,6 +111,41 @@ static XRectangle rectangles[] = {
    {  9,  4,  1,  2 },
    { 11,  4,  1,  2 },
 };
+#elif ACTIVE_DESIGN == DESIGN_LOGO_FLEXYCON
+static const int logosize   = 60;
+static const int logow      = 10;
+static const int logoh      = 10;
+
+static XRectangle rectangles[] = {
+    /* x   y   w   h */
+    {  0,  0,  6,  1 },
+    {  0,  9,  4,  1 },
+    {  1,  0,  1,  9 },
+    {  2,  5,  3,  1 },
+    {  4,  4,  1,  3 },
+    {  7,  6,  1,  4 },
+    {  7,  6,  3,  1 },
+    {  7,  9,  3,  1 },
+};
+#elif ACTIVE_DESIGN == DESIGN_EMOJI_SMILE
+static const int logosize   = 45;
+static const int logow      = 14;
+static const int logoh      = 14;
+
+static XRectangle rectangles[] = {
+    /* x   y   w   h */
+    {  3,  0,  8,  1 },
+    {  1,  1, 12,  3 },
+    {  0,  3,  3,  8 },
+    { 11,  3,  3,  8 },
+    {  5,  4,  4,  2 },
+    {  3,  6,  8,  3 },
+    {  4,  9,  6,  1 },
+    {  1, 10,  3,  3 },
+    { 10, 10,  3,  3 },
+    {  3, 11,  8,  3 },
+};
+#endif // ACTIVE_DESIGN
 #endif // DWM_LOGO_PATCH
 
 #if XRESOURCES_PATCH
